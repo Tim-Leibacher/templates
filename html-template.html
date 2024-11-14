@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* Grundlegende Seitengestaltung */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        /* Karten-Design für Inhaltsblöcke */
+        .my-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Kopfzeilen-Gestaltung */
+        .my-header {
+            background-color: #4287f5;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        /* Button-Design */
+        .my-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        
+        .my-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        
+        /* Bilder-Gestaltung */
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        /* Profilbild-Gestaltung */
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 20px auto;
+            display: block;
+            border: 5px solid #4287f5;
+        }
+        
+        /* Link-Gestaltung */
+        a {
+            color: #4287f5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #2c5aa0;
+            text-decoration: underline;
+        }
+        
+        /* Listen-Gestaltung */
+        ul {
+            list-style-type: circle;
+            padding-left: 20px;
+        }
+        
+        /* Wetter-Sektion */
+        .weather-section {
+            background-color: #e1f5fe;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Tabellen-Design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4287f5;
+            color: white;
+        }
+
+        /* Hilfe-Text Gestaltung */
+        .help-text {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            margin: 5px 0;
+        }
+
+        /* Neue Styles für interaktive Elemente */
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+        }
+
+        .emoji-container {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .emoji-btn {
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        /* Animation für Wettersymbole */
+        .weather-icon {
+            font-size: 40px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Flex-Container für besseres Layout */
+        .flex-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flex-item {
+            flex: 1;
+            min-width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Kopfbereich -->
+    <div class="my-header">
+        <h1>Meine eigene Webseite!</h1>
+        <p>Erstellt von: [Dein Name]</p>
+    </div>
+
+    <!-- Über mich Sektion mit Profilbild -->
+    <div class="my-card">
+        <div class="flex-container">
+            <div class="flex-item">
+                <h2>Über mich</h2>
+                <img src="/api/placeholder/200/200" alt="Mein Profilbild" class="profile-pic">
+                <p class="help-text">Hier kommt dein Profilbild hin!</p>
+            </div>
+            <div class="flex-item">
+                <h3>Meine Lieblingssachen:</h3>
+                <ul>
+                    <li>Lieblingsfarbe: <span id="favColor">Blau</span></li>
+                    <li>Lieblingstier: [Dein Tier]</li>
+                    <li>Lieblingshobby: [Dein Hobby]</li>
+                    <li>Lieblingsessen: [Dein Essen]</li>
+                    <li>Lieblingsfach: [Dein Schulfach]</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interaktive Farbauswahl -->
+        <div class="my-card">
+            <h3>Meine Lieblingsfarben (klicke zum Ändern):</h3>
+            <div id="colorPalette">
+                <div class="color-box" style="background-color: #ff0000;" onclick="changeColor('#ff0000')"></div>
+                <div class="color-box" style="background-color: #00ff00;" onclick="changeColor('#00ff00')"></div>
+                <div class="color-box" style="background-color: #0000ff;" onclick="changeColor('#0000ff')"></div>
+                <div class="color-box" style="background-color: #ffff00;" onclick="changeColor('#ffff00')"></div>
+                <div class="color-box" style="background-color: #ff69b4;" onclick="changeColor('#ff69b4')"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mein Tag Sektion -->
+    <div class="my-card">
+        <h2>Mein Tag</h2>
+        <table>
+            <tr>
+                <th>Uhrzeit</th>
+                <th>Aktivität</th>
+                <th>Stimmung</th>
+            </tr>
+            <tr>
+                <td>08:00</td>
+                <td>Aufstehen</td>
+                <td><button class="emoji-btn" onclick="cycleEmoji(this)">😊</button></td>
+            </tr>
+            <tr>
+                <td>12:00</td>
+                <td>Mittagessen</td>
+                <td><button class="emoji-btn" onclick="cycleEmoji(this)">😋</button></td>
+            </tr>
+            <tr>
+                <td>15:00</td>
+                <td>Hausaufgaben</td>
+                <td><button class="emoji-btn" onclick="cycleEmoji(this)">📚</button></td>
+            </tr>
+            <tr>
+                <td>18:00</td>
+                <td>Freizeit</td>
+                <td><button class="emoji-btn" onclick="cycleEmoji(this)">🎮</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Wetter-Report Sektion -->
+    <div class="my-card weather-section">
+        <h2>Mein Wetterbericht</h2>
+        <div class="flex-container">
+            <div class="flex-item">
+                <h3>Heute <span class="weather-icon">☀️</span></h3>
+                <div style="background-color: #000; width: 100%; height: 300px; display: flex; justify-content: center; align-items: center; color: white; margin: 10px 0;">
+                    [Hier kommt dein Wetter-Video]
+                </div>
+            </div>
+            <div class="flex-item">
+                <h3>Wettervorhersage</h3>
+                <table>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Temp.</th>
+                        <th>Wetter</th>
+                    </tr>
+                    <tr>
+                        <td>Heute</td>
+                        <td>22°C</td>
+                        <td><button class="emoji-btn" onclick="cycleWeather(this)">☀️</button></td>
+                    </tr>
+                    <tr>
+                        <td>Morgen</td>
+                        <td>20°C</td>
+                        <td><button class="emoji-btn" onclick="cycleWeather(this)">🌤️</button></td>
+                    </tr>
+                    <tr>
+                        <td>Übermorgen</td>
+                        <td>18°C</td>
+                        <td><button class="emoji-btn" onclick="cycleWeather(this)">🌧️</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fun Zone -->
+    <div class="my-card">
+        <h2>Spaß-Ecke</h2>
+        <div class="flex-container">
+            <div class="flex-item">
+                <h3>Meine Lieblings-Emojis</h3>
+                <div class="emoji-container" id="emojiContainer">
+                    Klicke hier für Emojis: 
+                    <button class="emoji-btn" onclick="addEmoji('😊')">😊</button>
+                    <button class="emoji-btn" onclick="addEmoji('🎮')">🎮</button>
+                    <button class="emoji-btn" onclick="addEmoji('🎨')">🎨</button>
+                    <button class="emoji-btn" onclick="addEmoji('🎵')">🎵</button>
+                    <button class="emoji-btn" onclick="addEmoji('⚽')">⚽</button>
+                </div>
+                <div id="emojiDisplay" style="min-height: 50px; border: 1px dashed #ccc; padding: 10px; margin-top: 10px;">
+                    Deine Emojis erscheinen hier!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Farbe ändern
+        function changeColor(color) {
+            document.getElementById('favColor').style.color = color;
+            document.getElementById('favColor').textContent = color;
+        }
+
+        // Emoji Rotation für Stimmungen
+        function cycleEmoji(button) {
+            const emojis = ['😊', '😋', '😎', '🤩', '😴', '🤔', '📚', '🎮', '🎨', '🎵'];
+            const currentIndex = emojis.indexOf(button.textContent);
+            const nextIndex = (currentIndex + 1) % emojis.length;
+            button.textContent = emojis[nextIndex];
+        }
+
+        // Wetter Emoji Rotation
+        function cycleWeather(button) {
+            const weatherEmojis = ['☀️', '🌤️', '☁️', '🌧️', '⛈️', '❄️'];
+            const currentIndex = weatherEmojis.indexOf(button.textContent);
+            const nextIndex = (currentIndex + 1) % weatherEmojis.length;
+            button.textContent = weatherEmojis[nextIndex];
+        }
+
+        // Emojis zur Spaß-Ecke hinzufügen
+        function addEmoji(emoji) {
+            const display = document.getElementById('emojiDisplay');
+            if (display.textContent === 'Deine Emojis erscheinen hier!') {
+                display.textContent = '';
+            }
+            display.textContent += emoji + ' ';
+        }
+    </script>
+</body>
+</html>
